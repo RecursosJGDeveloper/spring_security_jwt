@@ -18,7 +18,6 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    // Clave en Base64 (32 bytes) usada para HMAC SHA-256
     private static final String SECRET_KEY = "VGhpc0lzQVRlc3RLZXlGb3JTdHJpbmdTZWN1cml0eTEyMzQ1Njc4";
 
     public String getToken(UserDetails user) {
@@ -31,7 +30,7 @@ public class JwtService {
             .setClaims(extraClaims)
             .setSubject(user.getUsername())
             .setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 24 horas
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
             .signWith(getKey(), SignatureAlgorithm.HS256)
             .compact();
     }
